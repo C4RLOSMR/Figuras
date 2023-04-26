@@ -1,102 +1,123 @@
-class Figura {
-   constructor(x, y, alto, ancho, vx, vy) {
-    this.posicion = createVector(x,y);
-    this.alto = alto;
-    this.ancho = ancho;
-    this.fillred = 255;
-    this.fillgreen = 87;
-    this.fillblue = 57;
-    this.velocidad = createVector(vx,vy);
+
+const GRAVITY = 10;
+const JUMP_HEIGHT = 9.0;
+const GROUND_HEIGHT = 20; 
+
+const WIDTH = 400;
+const HEIGHT = 600;
+
+var SCROLL_SPEED = 3;
+let score = 0;
+
+function setup() {
+  createCanvas(WIDTH, HEIGHT);
+}
+
+function getRndInteger(min, max) {
+
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+class Bird {
+  constructor(x, y, size) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.vely = 0;
   }
-  update()
-  {
-      if (this.posicion.x + this.ancho >= 400)
-        {  
-          let valor = random(3); 
-          this.velocidad.x = this.velocidad.x * -valor;
-         this.velocidad.y = this.velocidad.y * -valor;
+
+  draw() {
+    circle(this.x, this.y, this.size);
+  }
+
+  update() {
+    this.y += this.vely;
+    this.vely = lerp(this.vely, GRAVITY, 0.05);
+    this.y = Math.max(this.size / 2, Math.min(this.y, HEIGHT - GROUND_HEIGHT - this.size / 2));
+    
+  }
+
+  flap() {
+    this.vely = -JUMP_HEIGHT;
+  }
+
+  checkDeath(pipes) {
+    for (var pipe of pipes.pipes_list) {
+      if (this.x + this.size / 2 > pipe.x && pipe.height && this.x - this.size / 2 < pipe.x + pipes.width) {
+        if (this.y - this.size / 2 <= pipe.height || this.y + this.size / 2 >= pipe.height + pipes.gap) {
+          window.location.reload();
         }
-      this.posicion.add(this.velocidad);
-  }
-  
-}
+      }
 
-class Rectangulo extends Figura{
-  constructor(x, y, alto, ancho, vx, vy) {
-      super(x, y, alto, ancho, vx, vy);
-  }
-  
-draw()
-  {
-fill(this.fillred,this.fillgreen,this.fillblue);
-rect(this.posicion.x,this.posicion.y,this.alto,this.ancho);
+    }
   }
 }
 
-class Elipse extends Figura{
-  constructor(x, y, alto, ancho, vx, vy) {
-      super(x, y, alto, ancho, vx, vy);
-  }
-  
-draw()
-  {
-fill(this.fillred,this.fillgreen,this.fillblue);
-ellipse(this.posicion.x,this.posicion.y,this.alto,this.ancho);
-  }
+function displayScore()
+{
+  fill(200);
+  textSize(20);
+  text("Score: " + score,20,50);
 }
 
-var figuras = [];
-var dibujando = 'circulo';
-var btnCirculo = null;
-var btnRectangulo = null;
+
+class Pipes {
+  constructor(width, frequency, gap) {
+    this.width = width;
+    this.frequency = frequency;
+    this.gap = gap;
+
+    this.pipes_list = [
+      { x: 500, height: getRndInteger(this.gap, HEIGHT - GROUND_HEIGHT - this.gap), scored: false },
+      { x: 500 + this.width + this.frequency, height: getRndInteger(this.gap, HEIGHT - GROUND_HEIGHT - this.gap), scored: false }
+    ];
+  }
+
+  update() {   
+    for (var pipe of this.pipes_list) {
+      pipe.x -= SCROLL_SPEED;
+      if (pipe.x + this.width <= 0) {
+        pipe.x = WIDTH;
+        pipe.height = getRndInteger(this.gap, HEIGHT - GROUND_HEIGHT - this.gap - this.gap);
+    score ++;
+      }
+        
+    } 
+    
+  }
+
+  drawPipes() {
+    for (var pipe of this.pipes_list) {
+      rect(pipe.x, 0, this.width, pipe.height);
+      rect(pipe.x, HEIGHT - GROUND_HEIGHT, this.width, -HEIGHT + pipe.height + GROUND_HEIGHT + this.gap);
+    }
+  }
+
+}
+
+var bird = new Bird(WIDTH / 2, HEIGHT / 2, 30);
+var pipes = new Pipes(60, 150, 130);
+
+
+function draw() {
+  background("#2595DA");
+
+  rect(0, HEIGHT - GROUND_HEIGHT, WIDTH, HEIGHT);
+
+  bird.draw();
+  bird.update();
+  bird.checkDeath(pipes);
+
+  pipes.update();
+  pipes.drawPipes();
+
+  fill(255);
+  displayScore();
+  // SCROLL_SPEED += 0.01;
+}
+
 
 
 function mouseClicked() {
-  // Se crea un objeto según la opción actual
-if (mouseY > 25)
-  {
-  if (dibujando == 'circulo')
-    figuras.push(new Elipse(mouseX,mouseY,20,20,3,1));
-  else if (dibujando == 'rectangulo')
-    figuras.push(new Rectangulo(mouseX,mouseY,20,20,2,1));
-  }
-
-  return false;
-}
-
-function setup() {
-  createCanvas(400, 400);
-  
-  btnCirculo = createButton('Circulo');
-  btnCirculo.position(0, 0);
-  btnCirculo.mousePressed(changeCirculo);
-  btnCirculo.style( 'background-color','#cccccc');
-  
-  btnRectangulo = createButton('Rectangulo');
-  btnRectangulo.position(75, 0);
-  btnRectangulo.mousePressed(changeRectangulo);
-}
-
-function changeCirculo()
-   {
-     btnCirculo.style( 'background-color','#cccccc');
-     btnRectangulo.style( 'background-color','#f0f0f0');
-     dibujando = 'circulo';
-   }
-function changeRectangulo()
-   {
-     btnRectangulo.style( 'background-color','#cccccc');
-     btnCirculo.style( 'background-color','#f0f0f0');
-     dibujando = 'rectangulo';
-   }
-
- 
-
-function draw() {
-  background(220);
-  figuras.forEach((fig) => 
-   {
-    fig.draw();
-    fig.update();
-   });
+  bird.flap();
 }
