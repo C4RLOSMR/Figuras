@@ -14,7 +14,7 @@ let PUNTAJE = 1;
 (Este bloque de codigo es para declarar las variables.)
                               
 
-<code style="color : blue">function setup()
+<code style="color : aqua">function setup()
   {
   createCanvas(ANCHO, ALTO);
 }     
