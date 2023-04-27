@@ -11,8 +11,8 @@ const ALTO = 600;
 var VELOCIDAD = 3;
 let PUNTAJE = 1;
 
-Este bloque de codigo es para declarar las variables.
-    
+(Este bloque de codigo es para declarar las variables.)
+                              
 
 
 
