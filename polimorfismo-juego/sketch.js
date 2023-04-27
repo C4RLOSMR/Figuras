@@ -113,7 +113,6 @@ function draw() {
 
   fill(255);
   displayScore();
-  // SCROLL_SPEED += 0.01;
 }
 
 
