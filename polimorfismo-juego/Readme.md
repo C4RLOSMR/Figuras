@@ -12,13 +12,13 @@ var VELOCIDAD = 3;
 let PUNTAJE = 1;
 
 Este bloque de codigo es para declarar las variables.
-
+    
 
 
 
 function setup() {
   createCanvas(ANCHO, ALTO);
-}
+}     
 (Se crea el tamaño para el canvas del juego)
 
 
