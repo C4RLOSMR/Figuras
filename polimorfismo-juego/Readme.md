@@ -73,19 +73,13 @@ Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
 </code>
 (La función flap() hace que el atributo vely del objeto Bird sea establecido a un valor negativo (-ALTURA_SALTO), lo que provoca que el objeto salte cuando se actualiza en la función update().)
 ***
-
 <code style="color : aqua">
     checkDeath(pipes) {
     for (var pipe of pipes.pipes_list) {
       if (this.x + this.size / 2 > pipe.x && pipe.height && this.x - this.size / 2 < pipe.x + pipes.width) {
         if (this.y - this.size / 2 <= pipe.height || this.y + this.size / 2 >= pipe.height + pipes.gap) {
           window.location.reload();
-        }
-      }
-
-    }
-  }
-}
+        }  } } }}
 </code>
 (La función "checkDeath" recibe como parámetro un objeto "pipes". Luego, itera sobre la lista de pipes dentro de ese objeto, y verifica si la posición del pájaro (representado por el objeto "this") se superpone con la posición de algún pipe. Si el pájaro toca el pipe, se recarga la página web usando la función "window.location.reload()".)
 
