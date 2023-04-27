@@ -11,7 +11,6 @@ let PUNTAJE = 1;
 </code>
 (Este bloque de codigo es para declarar las variables.)
 ***
----
 
 <code style="color : aqua">function setup()
   {
@@ -20,7 +19,6 @@ let PUNTAJE = 1;
 </code>
 (Se crea el tamaño para el canvas del juego)
 ***
----
 
 <code style="color : aqua">
 function getRndInteger(min, max) {
@@ -46,7 +44,6 @@ class Bird {
 (Dentro del constructor, se establecen cuatro propiedades del objeto Bird que se creará a partir de esta clase: this.x, this.y, this.size y this.vely. Estas propiedades se inicializan con los valores pasados como parámetros, con this.x, this.y y this.size establecidos en los valores pasados para x, y y size, respectivamente, y this.vely inicializado en 0.
 Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
 ***
----
 
  <code style="color : aqua">
   draw() {
@@ -55,7 +52,6 @@ Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
  </code>
 (Se utiliza la función circle() para dibujar un círculo en la posición (this.x, this.y) con un diámetro igual a this.size. El uso de this en this.x, this.y y this.size)
 ***
----
 
   <code style="color : aqua">
   
@@ -70,7 +66,6 @@ Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
   La línea this.y = Math.max(this.size / 2, Math.min(this.y, ALTO - ALTURA_SUELO - this.size / 2)); asegura que la posición vertical de Bird no se salga de los límites del juego. Math.max() y Math.min() se utilizan para limitar la posición vertical de Bird a estar dentro del rango de this.size / 2 y ALTO - ALTURA_SUELO - this.size / 2.)
   
   ***
-  ---
    <code style="color : aqua">
     flap() {
     this.vely = -ALTURA_SALTO;
@@ -78,7 +73,6 @@ Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
 </code>
 (La función flap() hace que el atributo vely del objeto Bird sea establecido a un valor negativo (-ALTURA_SALTO), lo que provoca que el objeto salte cuando se actualiza en la función update().)
 ***
----
 
 <code style="color : aqua">
     checkDeath(pipes) {
@@ -96,7 +90,6 @@ Esta clase se utiliza para crear objetos Bird, que se utilizan en el juego.)
 (La función "checkDeath" recibe como parámetro un objeto "pipes". Luego, itera sobre la lista de pipes dentro de ese objeto, y verifica si la posición del pájaro (representado por el objeto "this") se superpone con la posición de algún pipe. Si el pájaro toca el pipe, se recarga la página web usando la función "window.location.reload()".)
 
 ***
----
 <code style="color : aqua">
 function displayScore()
 {
@@ -108,7 +101,6 @@ function displayScore()
   (La función displayScore() muestra el puntaje actual en la pantalla del juego. Primero, establece el color de relleno en gris claro y el tamaño de fuente en 20. Luego, muestra el texto "Puntaje: " seguido del valor de la variable PUNTAJE en la posición (20,50) de la pantalla.)
   
   ***
-  ---
   <code style="color : aqua">
   class Pipes {
   constructor(width, frequency, gap) {
@@ -124,7 +116,6 @@ function displayScore()
   </code>
   La línea de código define una clase llamada Pipes que tiene un constructor con tres parámetros (ancho, frecuencia y brecha). También inicializa una lista de tuberías con dos objetos que tienen propiedades como posición x, altura aleatoria y si ha sido puntuado o no.
  ***
- ---
  <code style="color : aqua">
    update() {   
     for (var pipe of this.pipes_list) {
@@ -142,7 +133,6 @@ function displayScore()
   (La línea de código actualiza la posición de cada tubería en la lista de tuberías y aumenta el puntaje en caso de que una tubería haya pasado el pájaro y se haya anotado un punto. Si una tubería ha pasado el borde izquierdo de la pantalla, la posición de la tubería se restablece en el lado derecho de la pantalla y se genera una nueva altura para la tubería.)
   
   ***
-  ---
    <code style="color : aqua">
     drawPipes() {
     for (var pipe of this.pipes_list) {
@@ -156,7 +146,6 @@ function displayScore()
   (La función drawPipes() dibuja los tubos del juego en la pantalla. Itera sobre los objetos pipe en la lista pipes_list y dibuja dos rectángulos para cada uno: uno desde la parte superior de la pantalla hasta la altura del tubo, y otro desde la parte inferior del tubo hasta el suelo.)
   
   ***
-  ---
   <code style="color : aqua">
   var bird = new Bird(ANCHO / 2, ALTO / 2, 30);
 var pipes = new Pipes(60, 150, 130);
@@ -164,7 +153,6 @@ var pipes = new Pipes(60, 150, 130);
   (En estas líneas de código se crean una instancia de la clase Bird y otra instancia de la clase Pipes, con ciertos parámetros iniciales. La instancia de la clase Bird se crea en la posición central de la pantalla con un tamaño de 30 píxeles, mientras que la instancia de la clase Pipes se crea con un ancho de 60 píxeles, una frecuencia de 150 píxeles y un hueco de 130 píxeles.)
   
   ***
-  ---
    <code style="color : aqua">
   function draw() {
   background("#2595DA");
@@ -186,7 +174,6 @@ var pipes = new Pipes(60, 150, 130);
   (Este código define la función draw(), que se ejecuta repetidamente en un bucle, y se encarga de dibujar el fondo del juego, el pájaro, las tuberías, el puntaje y actualiza la posición del pájaro y de las tuberías en cada iteración del bucle. También comprueba si el pájaro ha chocado con alguna de las tuberías y muestra la puntuación actual.)
   
   ***
-  ---
    <code style="color : aqua">
   function mouseClicked() {
   bird.flap();
