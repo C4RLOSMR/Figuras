@@ -1,4 +1,4 @@
-**Videojuego estilo flappy bird**
+# **Videojuego estilo flappy bird**
 
 <code style="color : aqua">function setup()
 const GRAVEDAD = 10;
@@ -10,7 +10,7 @@ var VELOCIDAD = 3;
 let PUNTAJE = 1;
 </code>
 (Este bloque de codigo es para declarar las variables.)
-                              
+***
 
 <code style="color : aqua">function setup()
   {
