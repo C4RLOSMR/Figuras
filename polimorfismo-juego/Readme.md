@@ -16,10 +16,11 @@ let PUNTAJE = 1;
 
 
 
-function setup() {
+<font color="green"> function setup() {
   createCanvas(ANCHO, ALTO);
 }     
 (Se crea el tamaño para el canvas del juego)
+</font>
 
 
 
