@@ -14,13 +14,12 @@ let PUNTAJE = 1;
 (Este bloque de codigo es para declarar las variables.)
                               
 
-<code style="color : name_color">
- function setup() {
+<code style="color : blue">function setup()
+  {
   createCanvas(ANCHO, ALTO);
 }     
-(Se crea el tamaño para el canvas del juego)
-
 </code>
+(Se crea el tamaño para el canvas del juego)
 
 
 
