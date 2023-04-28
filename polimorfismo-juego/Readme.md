@@ -186,4 +186,4 @@ var pipes = new Pipes(60, 150, 130);
   (Esta función se ejecuta cada vez que el usuario hace clic en el lienzo del juego. En este caso, llama al método flap() del objeto bird, lo que hace que el circulo salte.)  
     
     ***
-![](./Diagrama sin título.drawio.png)
+![](./polimorfismo-juego/Diagrama sin título.drawio.png)
